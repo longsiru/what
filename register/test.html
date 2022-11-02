@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .box {
+        width: 160px;
+        padding: 5px;
+        border: 1px solid #333;
+        margin: 100px auto;
+      }
+
+      .box > div {
+        padding: 15px;
+      }
+      .allbtn {
+        border-bottom: 1px solid #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="allbtn">全选: <input type="checkbox" name="" id="" /></div>
+      <div class="itembtn">
+        选项一: <input type="checkbox" name="" id="" /><br />
+        选项二: <input type="checkbox" name="" id="" /><br />
+        选项三: <input type="checkbox" name="" id="" /><br />
+      </div>
+    </div>
+
+    <script>
+      var allbtn = document.querySelector(".allbtn > input");
+      //    获取allbt下面的input
+      var itembtn = document.querySelectorAll(".itembtn > input");
+      //   获取itembtn里面的每一个input
+      // 首先监听allbtn的点击事件,每次点击选中allbtn,就让itembtn里面每一个input将checkbox转换成checked
+      allbtn.addEventListener("click", function () {
+        //   监听点击事件
+        var type = allbtn.checked;
+        // 将allbtn的是否选中状态赋给变量type
+
+        itembtn.forEach(function (item) {
+          item.checked = type;
+        });
+        // 遍历itembtn下面的每一个input，让其是否选中的状态与allbtn保持一致
+      });
+      //  让itembtn里的每一个input选中状态决定allbtn的选中状态，都选中则选中，有一个不选中就不选中
+      itembtn.forEach(function (item) {
+        item.addEventListener("click", function () {
+          //  遍历itembtn里的每一个input，给其每一个添加点击事件
+          var flag = true;
+          //  设置一个开关
+          itembtn.forEach(function (item) {
+            if (item.checked === false)
+              //  判断当前每一个的input的选中状态
+              return (flag = false);
+          });
+          return (allbtn.checked = flag);
+        });
+      });
+    </script>
+    插入代码片
+  </body>
+</html>
