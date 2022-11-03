@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  <body>
+    <table>
+      <tr>
+        <th>아이디 <span>*</span></th>
+        <td>
+          <input
+            type="text"
+            id="userId"
+            maxlength="30"
+            placeholder="아이디를 입력해 주세요"
+          />
+        </td>
+      </tr>
+      <tr>
+        <th>비밀번호 <span>*</span></th>
+        <td>
+          <input type="password" placeholder="비밀번호를 입력해 주세요" />
+        </td>
+      </tr>
+      <tr>
+        <th>이름 <span>*</span></th>
+        <td>
+          <input
+            type="text"
+            maxlength="20"
+            placeholder="이름을 입력해 주세요"
+          />
+        </td>
+      </tr>
+      <tr>
+        <th>주소</th>
+        <td>
+          <input type="text" class="zip_code" id="zipNo" readonly />
+          <button
+            type="button"
+            class="zip_code_btn"
+            onclick="javascript:goPopup();"
+          >
+            우편번호</button
+          ><br />
+          <input
+            type="text"
+            placeholder="기본 주소를 입력해 주세요"
+            id="addr"
+          /><br />
+          <input
+            type="text"
+            placeholder="나머지 주소를 입력해 주세요"
+            id="addrDetail"
+          />
+        </td>
+      </tr>
+    </table>
+    <script>
+      var goPopup = function () {
+        var pop = window.open(
+          "${ctx}/hp/member/jusoPopup.do",
+          "pop",
+          "width=570,height=420, scrollbars=yes, resizable=yes"
+        );
+      };
+      var jusoCallBack = function (
+        roadFullAddr,
+        roadAddrPart1,
+        addrDetail,
+        roadAddrPart2,
+        engAddr,
+        jibunAddr,
+        zipNo
+      ) {
+        document.getElementById("zipNo").value = zipNo;
+        document.getElementById("addr").value = roadAddrPart1;
+        if (addrDetail.length > 30) {
+          alert("상세주소가 너무 길어 다시 입력해야 합니다.");
+          return;
+        }
+        document.getElementById("addrDetail").value = addrDetail;
+      };
+    </script>
+  </body>
+</html>
